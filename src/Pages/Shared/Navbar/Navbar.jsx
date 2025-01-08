@@ -11,7 +11,7 @@ const Navber = () => {
     <NavLink to='/our-shop'>OUR SHOP</NavLink>
     </>
     return (
-        <div className="bg-orange-100">
+        <div className="fixed z-40 w-full bg-black bg-opacity-25 text-white">
             <div className="navbar px-2
              md:px-10">
                 <div className="">
