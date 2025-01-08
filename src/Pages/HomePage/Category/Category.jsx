@@ -27,23 +27,23 @@ const Category = () => {
             >
                 <SwiperSlide>
                     <img src={slide1} alt="" />
-                    <h2 className="uppercase text-white text-center -mt-16 font-medium text-lg">salad</h2>
+                    <h2 className="uppercase text-white text-center -mt-16 font-medium md:text-lg">salad</h2>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src={slide2} alt="" />
-                    <h2 className="uppercase text-white text-center -mt-16 font-medium text-lg">pizzas</h2>
+                    <h2 className="uppercase text-white text-center -mt-16 font-medium md:text-lg">pizzas</h2>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src={slide3} alt="" />
-                    <h2 className="uppercase text-white text-center -mt-16 font-medium text-lg">soups</h2>
+                    <h2 className="uppercase text-white text-center -mt-16 font-medium md:text-lg">soups</h2>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src={slide4} alt="" />
-                    <h2 className="uppercase text-white text-center -mt-16 font-medium text-lg">desserts</h2>
+                    <h2 className="uppercase text-white text-center -mt-16 font-medium md:text-lg">desserts</h2>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src={slide5} alt="" />
-                    <h2 className="uppercase text-white text-center -mt-16 font-medium text-lg">salad</h2>
+                    <h2 className="uppercase text-white text-center -mt-16 font-medium md:text-lg">salad</h2>
                 </SwiperSlide>
 
             </Swiper>

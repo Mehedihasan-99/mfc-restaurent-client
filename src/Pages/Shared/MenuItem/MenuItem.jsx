@@ -14,8 +14,8 @@ const MenuItem = ({ item }) => {
                 <p className='md:hidden text-yellow-600'>${price}</p>
             </div>
             <div className=' flex-1'>
-                <h2 className='text-gray-600 text-xl'>{name}--------</h2>
-                <p className='text-gray-400 text-sm'>{recipe.slice(0, 90)}{recipe.length >= 90 && "......"}</p>
+                <h2 className='text-gray-600 text-lg'>{name}--------</h2>
+                <p className='text-gray-400 text-xs'>{recipe.slice(0, 90)}{recipe.length >= 90 && "......"}</p>
             </div>
             <p className='hidden md:block text-yellow-600'>${price}</p>
         </div>
