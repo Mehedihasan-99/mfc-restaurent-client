@@ -10,6 +10,10 @@ const useMenu = () => {
                 setMenu(data);
                 setLoading(false);
             })
+            .catch(err => {
+                console.error("Failed to fetch menu: 100", err);
+                setLoading(false);
+            });
     }, [])
     return [menu, loading]
 };

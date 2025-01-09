@@ -21,6 +21,13 @@ const Menu = () => {
     const salads = menu.filter(item => item.category == "salad")
     const soups = menu.filter(item => item.category == "soup")
 
+    console.log("menu page", menu.length)
+
+
+
+
+
+    
     const menuDescribtion = "Explore a diverse menu featuring fresh ingredients, bold flavors, and delightful dishes. From appetizers to desserts, every bite is crafted to perfection, offering something special for every taste."
     const dessertDescribtion = "Explore a diverse menu featuring fresh ingredients, bold flavors, and delightful dishes. From appetizers to desserts, every bite is crafted to perfection, offering something special for every taste."
     const pizzaDescribtion = "Explore a diverse menu featuring fresh ingredients, bold flavors, and delightful dishes. From appetizers to desserts, every bite is crafted to perfection, offering something special for every taste."
