@@ -6,6 +6,8 @@ import Call from '../Call/Call';
 import Cover from '../../Shared/Cover/Cover';
 import Featured from '../Featured/Featured';
 import Testimonials from '../Testimonials/Testimonials';
+import { Helmet } from 'react-helmet-async';
+import bgImg from "../../../assets/home/chef-service.jpg"
 
 const Home = () => {
     const [bgColor, setBgColor] = useState(true)
@@ -14,9 +16,13 @@ const Home = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>MFC Restaurant | Home</title>
+            </Helmet>
             <Banner />
             <Category />
             <Cover
+                img={bgImg}
                 title={"MFC Restaurant"}
                 description={description}
                 bgColor={bgColor} />
