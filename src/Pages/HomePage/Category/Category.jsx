@@ -14,19 +14,23 @@ import SectionTitle from '../../../Components/Section/SectionTitle';
 const Category = () => {
     return (
         <div className='w-11/12 md:w-10/12 mx-auto'>
-            <SectionTitle subHeading="From 11:00am to 10:00pm" heading="order online" />
+            <SectionTitle
+                subHeading="From 11:00am to 10:00pm" heading="order online"
+            />
             <Swiper
-                slidesPerView={4}
-                spaceBetween={30}
+                slidesPerView={3}
+                spaceBetween={20}
                 centeredSlides={true}
                 pagination={{
                     clickable: true,
                 }}
                 modules={[Pagination]}
-                className="mySwiper mb-20"
+                className="mySwiper mb-5 md:mb-20"
             >
                 <SwiperSlide>
-                    <img src={slide1} alt="" />
+                    <img
+                        src={slide1}
+                        alt="" />
                     <h2 className="uppercase text-white text-center -mt-16 font-medium md:text-lg">salad</h2>
                 </SwiperSlide>
                 <SwiperSlide>

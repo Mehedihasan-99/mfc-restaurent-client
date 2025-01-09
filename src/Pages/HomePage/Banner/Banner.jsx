@@ -9,7 +9,7 @@ import img6 from '../../../assets/home/06.png'
 
 const Banner = () => {
     return (
-        <div className="mb-20">
+        <div className="mb-5 md:mb-20">
             <Carousel
                 autoPlay
                 interval={5000}

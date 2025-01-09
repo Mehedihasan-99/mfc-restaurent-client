@@ -5,6 +5,7 @@ import PopularMenu from '../PopularMenu/PopularMenu';
 import Call from '../Call/Call';
 import Cover from '../../Shared/Cover/Cover';
 import Featured from '../Featured/Featured';
+import Testimonials from '../Testimonials/Testimonials';
 
 const Home = () => {
     const [bgColor, setBgColor] = useState(true)
@@ -15,13 +16,14 @@ const Home = () => {
         <div>
             <Banner />
             <Category />
-            <Cover 
-            title={"MFC Restaurant"}
-            description={description}
-            bgColor={bgColor} />
+            <Cover
+                title={"MFC Restaurant"}
+                description={description}
+                bgColor={bgColor} />
             <PopularMenu />
             <Call />
             <Featured />
+            <Testimonials />
         </div>
     );
 };

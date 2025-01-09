@@ -1,7 +1,6 @@
 import React from 'react';
 
 const MenuItem = ({ item }) => {
-    console.log(item)
     const { image, name, price, recipe } = item;
     return (
         <div className='flex flex-col md:flex-row gap-2'>
