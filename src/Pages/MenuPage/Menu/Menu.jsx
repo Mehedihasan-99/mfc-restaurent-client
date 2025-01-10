@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Cover from '../../Shared/Cover/Cover';
-import SectionTitle from '../../../Components/Section/SectionTitle';
 import MenuCategory from '../MenuCategory/MenuCategory';
 import useMenu from '../../../Hooks/useMenu';
+import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 
 // img 
 import menuCover from '../../../assets/menu/banner3.jpg'
@@ -20,12 +20,6 @@ const Menu = () => {
     const pizzas = menu.filter(item => item.category == "pizza")
     const salads = menu.filter(item => item.category == "salad")
     const soups = menu.filter(item => item.category == "soup")
-
-    console.log("menu page", menu.length)
-
-
-
-
 
     
     const menuDescribtion = "Explore a diverse menu featuring fresh ingredients, bold flavors, and delightful dishes. From appetizers to desserts, every bite is crafted to perfection, offering something special for every taste."

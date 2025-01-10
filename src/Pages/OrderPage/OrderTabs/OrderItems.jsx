@@ -9,41 +9,35 @@ const OrderItems = () => {
     const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
     const { category } = useParams();
     const initialIndex = categories.indexOf(category)
-    const [tabIndex, setTabIndex] = useState(initialIndex);
-    const [ menu, loading ]  = useMenu()
+    const [tabIndex, setTabIndex] = useState(initialIndex === -1 ? 0 : initialIndex);
+    const [menu] = useMenu()
 
 
     const dessert = menu.filter(item => item.category == "salad");
     const soup = menu.filter(item => item.category === "soup");
     const salad = menu.filter(item => item.category === "salad");
     const pizza = menu.filter(item => item.category === "pizza");
-    const drink = menu.filter(item => item.category === "drink");
+    const drink = menu.filter(item => item.category === "drinks");
 
     const data = [salad, pizza, soup, dessert, drink];
 
-
-    // Filter menu items by category
-    console.log("data", menu )
-    if (loading) {
-        return <p>Loading menu .....</p>
-    }
-
     return (
         <div className='w-11/12 md:w-10/12 mx-auto mb-4 md:mb-20'>
-            { menu.length}
-            <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+             <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 {/* Tab Titles */}
                 <TabList>
-                    {categories.map((category, index) => (
-                        <Tab key={index}>{category}</Tab>
-                    ))}
+                    <div className='text-center space-x-5 '>
+                        {categories.map((category, index) => (
+                            <Tab key={index}>{category}</Tab>
+                        ))}
+                    </div>
                 </TabList>
 
 
                 {/* Tab Content */}
                 {data.map((items, index) => (
                     <TabPanel key={index}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2 md:mt-10">
                             {items.length > 0 ? (
                                 items.map(item => (
                                     <FoodCard key={item.id} item={item} />

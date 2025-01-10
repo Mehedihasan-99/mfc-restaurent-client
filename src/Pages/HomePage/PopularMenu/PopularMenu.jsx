@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import SectionHeader from '../../../Components/Section/SectionTitle';
 import MenuItem from '../../Shared/MenuItem/MenuItem';
 import Button from '../../../Components/Button/Button';
 import useMenu from '../../../Hooks/useMenu';
+import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 
 const PopularMenu = () => {
     const [ menu ]  = useMenu()
@@ -21,7 +21,7 @@ const PopularMenu = () => {
     
     return (
         <div className='w-11/12 md:w-10/12 mx-auto flex flex-col items-center  mb-4 md:mb-20'>
-            <SectionHeader subHeading='Check it Out' heading="from our menu" />
+            <SectionTitle subHeading='Check it Out' heading="from our menu" />
             <div className='grid lg:grid-cols-2 gap-4 mb-4 md:mb-10'>
                 {
                     popular.slice(0, 6).map(item => <MenuItem 

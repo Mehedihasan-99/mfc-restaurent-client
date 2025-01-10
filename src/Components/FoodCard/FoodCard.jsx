@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '../Button/Button';
 
 const FoodCard = ({ item }) => {
-    console.log("item", item)
     return (
         <div className="card bg-base-100 rounded-none shadow-xl">
             <figure>

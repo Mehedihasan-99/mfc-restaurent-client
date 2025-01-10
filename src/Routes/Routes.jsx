@@ -4,6 +4,7 @@ import MainLayout from '../Layout/MainLayout';
 import Home from '../Pages/HomePage/Home/Home';
 import Menu from '../Pages/MenuPage/Menu/Menu';
 import Order from '../Pages/OrderPage/Order/Order';
+import Login from '../Pages/LoginPage/Login';
 
 const Routes = createBrowserRouter ([
     {
@@ -23,6 +24,10 @@ const Routes = createBrowserRouter ([
                 element: <Order />
             }
         ]
+    },
+    {
+        path: "/login",
+        element: <Login />
     }
 ])
 

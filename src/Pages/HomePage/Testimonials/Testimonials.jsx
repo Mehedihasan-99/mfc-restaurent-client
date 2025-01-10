@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SectionTitle from '../../../Components/Section/SectionTitle';
 import { FaQuoteLeft } from "react-icons/fa";
 import Rating from "react-rating-stars-component";
 
@@ -8,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);

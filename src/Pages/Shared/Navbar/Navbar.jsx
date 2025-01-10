@@ -1,14 +1,15 @@
 import { SlMenu } from "react-icons/sl";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navber = () => {
 
     const NavLinks = <>
-    <li><NavLink to='/'>HOME</NavLink></li>
-    <li><NavLink to='/contact-us'>CONTACT US</NavLink></li>
-    <li><NavLink to='/dashboard'>DASHBOARD</NavLink></li>
-    <li><NavLink to='/menu'>OUR MENU</NavLink></li>
-    <li><NavLink to='/order/salad'>OUR SHOP</NavLink></li>
+        <li><NavLink to='/'>HOME</NavLink></li>
+        <li><NavLink to='/contact-us'>CONTACT US</NavLink></li>
+        <li><NavLink to='/dashboard'>DASHBOARD</NavLink></li>
+        <li><NavLink to='/menu'>OUR MENU</NavLink></li>
+        <li><NavLink to='/order/salad'>OUR SHOP</NavLink></li>
+        <li><NavLink to='/login'>LOGIN</NavLink></li>
     </>
     return (
         <div className="fixed z-40 w-full bg-black bg-opacity-25 text-white">
@@ -26,14 +27,14 @@ const Navber = () => {
                         </ul>
                     </div>
                     <div className="flex flex-col">
-                    <h1 className="md:text-xl lg:text-4xl text-red-400 font-bold">MFC</h1>
-                    <p className="text-[10px] md:text-sm lg:text-base -mt-2">Restaurant</p>
+                        <h1 className="md:text-xl lg:text-4xl text-red-400 font-bold">MFC</h1>
+                        <p className="text-[10px] md:text-sm lg:text-base -mt-2">Restaurant</p>
                     </div>
                 </div>
                 <div className='navbar-end flex-1 gap-5'>
                     <div className=" hidden lg:flex">
                         <ul className="menu menu-horizontal px-1 flex gap-5 ">
-                            { NavLinks }
+                            {NavLinks}
                         </ul>
                     </div>
                     <div className='flex items-center'>
