@@ -1,16 +1,22 @@
 import { SlMenu } from "react-icons/sl";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 const Navber = () => {
-
+    const { user, logout } =useAuth()
     const NavLinks = <>
         <li><NavLink to='/'>HOME</NavLink></li>
         <li><NavLink to='/contact-us'>CONTACT US</NavLink></li>
         <li><NavLink to='/dashboard'>DASHBOARD</NavLink></li>
         <li><NavLink to='/menu'>OUR MENU</NavLink></li>
         <li><NavLink to='/order/salad'>OUR SHOP</NavLink></li>
-        <li><NavLink to='/login'>LOGIN</NavLink></li>
+        <li>{ !user && <NavLink to='/login'>LOGIN</NavLink>}</li>
     </>
+
+    const handleLogout = () => {
+        logout()
+        console.log("logout")
+    }
     return (
         <div className="fixed z-40 w-full bg-black bg-opacity-25 text-white">
             <div className="navbar px-2
@@ -72,21 +78,16 @@ const Navber = () => {
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                     <img
-                                        alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                        alt={user?.email}
+                                        src={user?.photoURL} />
                                 </div>
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
-                                        <span className="badge">New</span>
-                                    </a>
-                                </li>
-                                <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] text-black text-lg mt-3 w-52 p-2 shadow">
+                                <p> Profile</p>
+                                <p className="mb-1"> {user?.email} </p>
+                                <button onClick={handleLogout} className="btn btn-sm btn-accent">Logout</button>
                             </ul>
                         </div>
                     </div>
