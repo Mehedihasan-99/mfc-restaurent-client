@@ -1,25 +1,53 @@
 import bgImg from "../../assets/others/authentication.png"
 import authenticationImg from "../../assets/others/authentication2.png";
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from "react";
 import PopUpLogin from "../Shared/PopUpLogin/PopUpLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-    const { createUser } = useAuth();
+    const { createUser, updateUserProfile } = useAuth();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const navigate = useNavigate();
     const onSubmit = (data) => {
+        console.log(data)
         createUser(data.email, data.password)
-        .then(result => {
-            const loggedUser = result.user;
-            console.log(loggedUser)
-        })
-        // console.log(data);
-        
-        reset()
+            .then(() => {
+                console.log("user create")
+                updateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        console.log("user update is success")
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Sign Up is Successfully",
+                            icon: "success",
+                            confirmButtonText: "Close",
+                        });
+                        reset();
+                        navigate(location?.state ? location.state : '/');
+                    })
+                    .catch((err) => {
+                        let message = "Your email & password do not match.";
+                        if (err.code === "auth/user-not-found") {
+                            message = "User not found. Please check your email.";
+                        } else if (err.code === "auth/wrong-password") {
+                            message = "Incorrect password. Please try again.";
+                        } else if (err.code === "auth/too-many-requests") {
+                            message = "Too many failed attempts. Try again later.";
+                        } else if (err.code === "auth/invalid-credential") {
+                            message = "invalid credential.";
+                        }
+                        alert(err.code)
+                        Swal.fire({
+                            icon: "error",
+                            title: "Login Failed",
+                            text: message,
+                        });
+                    });
+
+            })
     };
 
 
@@ -39,25 +67,36 @@ const SignUp = () => {
                     {/* form  */}
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body py-0
                         ">
+                        {/* name  */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" placeholder="Your Name" name="name" {...register("name", { required: true })} className="input input-bordered" />
+                            <input type="text" placeholder="Your Name" {...register("name", { required: true })} className="input input-bordered" />
                             {errors.name && <small className="text-red-500">Name is required</small>}
                         </div>
+                        {/* email  */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="Your Email" name="email" {...register("email", { required: true })} className="input input-bordered" />
+                            <input type="email" placeholder="Your Email" {...register("email", { required: true })} className="input input-bordered" />
                             {errors.email && <small className="text-red-500">Email is required</small>}
                         </div>
+                        {/* photo  */}
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo URL</span>
+                            </label>
+                            <input type="url" placeholder="Your Photo URL" {...register("photo", { required: true })} className="input input-bordered" />
+                            {errors.photo && <small className="text-red-500">Photo URL is required</small>}
+                        </div>
+                        {/* password  */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="password" name="password" {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,20}$/ })} className="input input-bordered" />
+                            <input type="password" placeholder="password" {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,20}$/ })} className="input input-bordered" />
                             {errors.password?.type === "required" && (
                                 <small className="text-red-500">Password is required.</small>
                             )}

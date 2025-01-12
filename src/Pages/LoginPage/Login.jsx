@@ -1,55 +1,67 @@
+import { FaFacebook, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import bgImg from "../../assets/others/authentication.png"
 import authenticationImg from "../../assets/others/authentication2.png";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from "react";
-import PopUpLogin from "../Shared/PopUpLogin/PopUpLogin";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import PopUpLogin from "../Shared/PopUpLogin/PopUpLogin";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const CaptchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
     const { signIn } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         loadCaptchaEnginge(6);
-    }, []);
+    }, [])
 
-    const onSubmit = (data) => {
-        signIn(data.email, data.password)
-            .then(result => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then((result) => {
                 const loggedUser = result.user;
-                console.log("login", loggedUser);
                 Swal.fire({
-                    title: 'Success!',
-                    text: 'Login Successfully',
-                    icon: 'success',
-                    confirmButtonText: 'Close'
+                    title: "Success!",
+                    text: "Login Successfully",
+                    icon: "success",
+                    confirmButtonText: "Close",
                 });
-                navigate(location?.state ? location.state : '/');
-                setDisabled(true)
-                loadCaptchaEnginge(6)
-                reset()
+                form.reset();
+                setDisabled(true);
+                loadCaptchaEnginge(6);
+                navigate(location?.state ? location.state : "/");
             })
-            .catch(() => {
+            .catch((err) => {
+                let message = "Your email & password do not match.";
+                if (err.code === "auth/user-not-found") {
+                    message = "User not found. Please check your email.";
+                } else if (err.code === "auth/wrong-password") {
+                    message = "Incorrect password. Please try again.";
+                } else if (err.code === "auth/too-many-requests") {
+                    message = "Too many failed attempts. Try again later.";
+                } else if (err.code === "auth/invalid-credential") {
+                    message = "invalid credential.";
+                }
+                alert(err.code)
                 Swal.fire({
                     icon: "error",
-                    title: "Something wrong!...",
-                    text: "Your email & password Does not match",
+                    title: "Login Failed",
+                    text: message,
                 });
             });
-    };
+    }
 
-    const handleCaptcha = () => {
-        const captcha = CaptchaRef.current.value;
-        if (validateCaptcha(captcha)) {
-            setDisabled(false)
-            console.log("captcha", captcha)
+    const handleCaptcha = (e) => {
+        const captcha = e.target.value;
+        if (captcha.length > 5 && validateCaptcha(captcha)) {
+            setDisabled(false);
         };
     };
     return (
@@ -65,21 +77,19 @@ const Login = () => {
                 </div>
                 <div className="card flex-col  md:w-1/2">
                     <h2 className="text-center font-bold text-xl md:text-3xl">Login</h2>
-                    {/* login  */}
-                    <form onSubmit={handleSubmit(onSubmit)} className="card-body py-0
+                    <form onSubmit={handleSubmit} className="card-body py-0
                         ">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="Your Email" name="email" {...register("email", { required: true })} className="input input-bordered" />
-                            {errors.email && <small className="text-red-500">Email is required</small>}
+                            <input type="email" placeholder="Type Here" name="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="password" name="password" {...register("password", { required: true })} className="input input-bordered" />
+                            <input type="password" placeholder="password" name="password" className="input input-bordered" required />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
@@ -90,8 +100,7 @@ const Login = () => {
                                 <LoadCanvasTemplate />
                             </label>
                             <div className="input flex justify-between p-0 ">
-                                <input type="text" ref={CaptchaRef} placeholder="Type this Captcha " name="captcha" className="pl-2 rounded-r-none" required />
-                                <button onClick={handleCaptcha} className="btn btn-accent rounded-l-none">Valid</button>
+                                <input type="text" onChange={handleCaptcha} placeholder="Type this Captcha " name="captcha" className="flex-1 input input-bordered rounded-r-none" required />
                             </div>
 
                         </div>
@@ -100,7 +109,7 @@ const Login = () => {
                         </div>
                     </form>
                     <div className="flex flex-col gap-1 items-center mt-2">
-                        <h4 className="text-yellow-500 text-xs">New here?<Link className="font-bold ml-2" to="/sign-up">Create a New Account</Link> </h4>
+                        <h4 className="text-yellow-500 text-xs">New here?<Link to={"/sign-up"}>sign Up</Link></h4>
                         <PopUpLogin />
                     </div>
                 </div>

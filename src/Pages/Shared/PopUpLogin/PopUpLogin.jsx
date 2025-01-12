@@ -1,12 +1,32 @@
 import { FaFacebook, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 const PopUpLogin = () => {
+    const { googleLogin } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(() => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Sign Up is Successfully",
+                    icon: "success",
+                    confirmButtonText: "Close",
+                });
+                navigate(location?.state ? location.state : '/');
+            })
+    }
+
     return (
         <div>
             <p className="font-semibold text-gray-500">Or sign in with</p>
             <div className="flex gap-3">
-                <span className="border border-black rounded-full p-1"><FaFacebookF /></span>
-                <span className="border border-black rounded-full p-1"><FaGoogle /></span>
-                <span className="border border-black rounded-full p-1"><FaGithub /></span>
+                <button className="border border-black rounded-full p-1"><FaFacebookF /></button>
+                <button onClick={handleGoogleLogin} className="border border-black rounded-full p-1"><FaGoogle /></button>
+                <button className="border border-black rounded-full p-1"><FaGithub /></button>
             </div>
         </div>
     );

@@ -3,20 +3,20 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 
 const Navber = () => {
-    const { user, logout } =useAuth()
+    const { user, logout } = useAuth()
+
     const NavLinks = <>
         <li><NavLink to='/'>HOME</NavLink></li>
         <li><NavLink to='/contact-us'>CONTACT US</NavLink></li>
         <li><NavLink to='/dashboard'>DASHBOARD</NavLink></li>
         <li><NavLink to='/menu'>OUR MENU</NavLink></li>
         <li><NavLink to='/order/salad'>OUR SHOP</NavLink></li>
-        <li>{ !user && <NavLink to='/login'>LOGIN</NavLink>}</li>
+        <li>{
+            user ? <button onClick={logout} >LOGOUT</button> : <NavLink to='/login'>LOGIN</NavLink>
+        }</li>
     </>
 
-    const handleLogout = () => {
-        logout()
-        console.log("logout")
-    }
+
     return (
         <div className="fixed z-40 w-full bg-black bg-opacity-25 text-white">
             <div className="navbar px-2
@@ -78,7 +78,7 @@ const Navber = () => {
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                     <img
-                                        alt={user?.email}
+                                        alt={user?.displayName}
                                         src={user?.photoURL} />
                                 </div>
                             </div>
@@ -86,8 +86,8 @@ const Navber = () => {
                                 tabIndex={0}
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] text-black text-lg mt-3 w-52 p-2 shadow">
                                 <p> Profile</p>
-                                <p className="mb-1"> {user?.email} </p>
-                                <button onClick={handleLogout} className="btn btn-sm btn-accent">Logout</button>
+                                <p className="mb-1">Name :{user?.displayName} </p>
+                                <p className="mb-1">Email : {user?.email} </p>
                             </ul>
                         </div>
                     </div>
