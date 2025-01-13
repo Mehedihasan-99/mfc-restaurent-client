@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../Button/Button';
 
 const FoodCard = ({ item }) => {
+
     return (
         <div className="card bg-base-100 rounded-none shadow-xl">
             <figure>
@@ -15,7 +16,7 @@ const FoodCard = ({ item }) => {
                 <h2 className="card-title">{item.name}</h2>
                 <p className='text-xs text-center'>{item.recipe}</p>
                 <div className="card-actions justify-end">
-                    <Button text="add to cart" color="yellow" />
+                    <Button  text="add to cart" color="yellow" item={item}/>
                 </div>
             </div>
         </div>

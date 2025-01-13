@@ -1,4 +1,3 @@
-import { FaFacebook, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import bgImg from "../../assets/others/authentication.png"
 import authenticationImg from "../../assets/others/authentication2.png";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
@@ -15,6 +14,8 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const from = location.state?.from?.pathname || "/";
+
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
@@ -24,9 +25,10 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
+
         signIn(email, password)
-            .then((result) => {
-                const loggedUser = result.user;
+            .then(() => {
+                navigate(from, { replace: true });
                 Swal.fire({
                     title: "Success!",
                     text: "Login Successfully",
@@ -36,7 +38,7 @@ const Login = () => {
                 form.reset();
                 setDisabled(true);
                 loadCaptchaEnginge(6);
-                navigate(location?.state ? location.state : "/");
+
             })
             .catch((err) => {
                 let message = "Your email & password do not match.";
@@ -49,7 +51,6 @@ const Login = () => {
                 } else if (err.code === "auth/invalid-credential") {
                     message = "invalid credential.";
                 }
-                alert(err.code)
                 Swal.fire({
                     icon: "error",
                     title: "Login Failed",

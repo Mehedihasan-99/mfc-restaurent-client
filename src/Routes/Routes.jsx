@@ -19,13 +19,13 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "/menu",
-                element: <Menu />
+                element: <Privateroutes>
+                    <Menu />
+                </Privateroutes>
             },
             {
                 path: "/order/:category",
-                element: <Privateroutes>
-                    <Order />
-                </Privateroutes>
+                element: <Order />
             },
             {
                 path: "/login",

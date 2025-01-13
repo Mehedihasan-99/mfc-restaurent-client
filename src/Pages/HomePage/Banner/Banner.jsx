@@ -9,8 +9,8 @@ import img6 from '../../../assets/home/06.png'
 import useAuth from "../../../Hooks/useAuth";
 
 const Banner = () => {
-    const{ user } = useAuth()
-    console.log(user)
+    const{ user } = useAuth();
+    
     return (
         <div className="mb-5 md:mb-20">
             <Carousel

@@ -66,7 +66,6 @@ const googleLogin = () => {
         const unsubscribe = onAuthStateChanged(auth, curentUser => {
             setUser(curentUser);
             setLoading(false);
-            console.log('Current User', curentUser);
         });
         return () => {
             return unsubscribe();
