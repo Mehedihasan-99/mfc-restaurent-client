@@ -5,10 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const SignUp = () => {
     const { createUser, updateUserProfile } = useAuth();
+    const axiosPublic = useAxiosPublic()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const onSubmit = (data) => {
@@ -18,15 +20,24 @@ const SignUp = () => {
                 console.log("user create")
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        console.log("user update is success")
-                        Swal.fire({
-                            title: "Success!",
-                            text: "Sign Up is Successfully",
-                            icon: "success",
-                            confirmButtonText: "Close",
-                        });
-                        reset();
-                        navigate(location?.state ? location.state : '/');
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        };
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log("user update is success")
+                                    Swal.fire({
+                                        title: "Success!",
+                                        text: "Sign Up is Successfully",
+                                        icon: "success",
+                                        confirmButtonText: "Close",
+                                    });
+                                    reset();
+                                    navigate(location?.state ? location.state : '/');
+                                }
+                            })
                     })
                     .catch((err) => {
                         let message = "Your email & password do not match.";

@@ -6,11 +6,11 @@ import useCart from "../../../Hooks/useCart";
 
 const Navber = () => {
     const { user, logout } = useAuth();
-    const [ cart ] = useCart();
+    const [cart] = useCart();
 
     const NavLinks = <>
         <li><NavLink to='/'>HOME</NavLink></li>
-        <li><NavLink to='/contact-us'>CONTACT US</NavLink></li>
+        <li><NavLink to='/contact'>CONTACT US</NavLink></li>
         <li><NavLink to='/dashboard'>DASHBOARD</NavLink></li>
         <li><NavLink to='/menu'>OUR MENU</NavLink></li>
         <li><NavLink to='/order/salad'>OUR SHOP</NavLink></li>
@@ -49,9 +49,12 @@ const Navber = () => {
                     <div className='flex items-center'>
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+
                                 <div className="indicator">
-                                    <img src={cartImg} alt="" />
-                                    <span className="badge badge-sm indicator-item top-7 left-1">+{cart.length}</span>
+                                    <NavLink to="/dashboard/cart">
+                                        <img src={cartImg} alt="" />
+                                        <span className="badge badge-sm indicator-item top-7 left-1">+{cart.length}</span>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
